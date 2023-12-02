@@ -1,12 +1,16 @@
 import React from 'react';
 import css from './styles.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerThunk } from 'redux/auth/auth.reducer';
 import { Link } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import Loader from 'components/Loader/Loader';
+import { selectAuthIsLoading } from 'redux/auth/auth.selectors';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectAuthIsLoading);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -71,6 +75,11 @@ const RegisterPage = () => {
       <p>
         If you have an account, please <Link to="/login">login</Link>
       </p>
+      {isLoading && (
+        <div className={css.loaderWrapper}>
+          <Loader />
+        </div>
+      )}
     </>
   );
 };

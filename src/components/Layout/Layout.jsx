@@ -3,18 +3,12 @@ import React from 'react';
 import css from './Layout.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from 'redux/auth/auth.reducer';
-import {
-  selectAuthIsLoading,
-  selectAuthenticated,
-  selectUserData,
-} from 'redux/auth/auth.selectors';
-import Loader from 'components/Loader/Loader';
+import { selectAuthenticated, selectUserData } from 'redux/auth/auth.selectors';
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const authenticated = useSelector(selectAuthenticated);
   const userData = useSelector(selectUserData);
-  const isLoading = useSelector(selectAuthIsLoading);
 
   const onLogOut = () => {
     dispatch(logOutThunk());
@@ -74,7 +68,7 @@ const Layout = ({ children }) => {
           )}
         </nav>
       </header>
-      <main className={css.wrapper}> {isLoading ? <Loader /> : children}</main>
+      <main className={css.wrapper}> {children}</main>
     </div>
   );
 };

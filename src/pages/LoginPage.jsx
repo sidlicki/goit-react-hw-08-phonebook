@@ -1,12 +1,16 @@
 import React from 'react';
 import css from './styles.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from 'redux/auth/auth.reducer';
 import { Link } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import { selectAuthIsLoading } from 'redux/auth/auth.selectors';
+import Loader from 'components/Loader/Loader';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectAuthIsLoading);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -20,7 +24,7 @@ const LoginPage = () => {
     };
     dispatch(loginThunk(formData))
       .unwrap()
-      .then(() => e.target.reset())
+      .then(() => Notiflix.Notify.success('Login Success'))
       .catch(() => {
         Notiflix.Notify.failure(
           'Login or password incorrectly, please try again'
@@ -54,13 +58,18 @@ const LoginPage = () => {
         </label>
         <br />
         <button className={css.button} type="submit">
-          Sign In
+          Sign in
         </button>
       </form>
       <p>
         If you do not have an account, please{' '}
         <Link to="/register">register</Link>
       </p>
+      {isLoading && (
+        <div className={css.loaderWrapper}>
+          <Loader />
+        </div>
+      )}
     </>
   );
 };
