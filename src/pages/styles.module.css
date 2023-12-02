@@ -1,0 +1,21 @@
+.title,
+.subtitle {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  color: rgb(41, 0, 0);
+  background-color: rgba(10, 85, 151, 0.316);
+  padding: 4px 0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.title {
+  width: 100%;
+}
+
+.subtitle {
+  width: 70%;
+  margin-top: 40px;
+}

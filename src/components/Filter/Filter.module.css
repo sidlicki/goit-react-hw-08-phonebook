@@ -1,0 +1,22 @@
+.input {
+  width: 40%;
+  min-width: 150px;
+  height: 36px;
+  padding: 0 15px 0 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(41, 0, 0);
+  background-color: rgba(10, 85, 151, 0.116);
+  transition: 0.3s ease;
+}
+.input:focus {
+  background-color: rgba(10, 85, 151, 0.305);
+  transition: 0.3s ease;
+}
+.input:hover {
+  background-color: rgba(10, 85, 151, 0.305);
+  transition: 0.3s ease;
+}
