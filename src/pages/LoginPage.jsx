@@ -2,6 +2,8 @@ import React from 'react';
 import css from './styles.module.css';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from 'redux/auth/auth.reducer';
+import { Link } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -16,35 +18,49 @@ const LoginPage = () => {
       email,
       password,
     };
-
-    dispatch(loginThunk(formData));
+    dispatch(loginThunk(formData))
+      .unwrap()
+      .then(() => e.target.reset())
+      .catch(() => {
+        Notiflix.Notify.failure(
+          'Login or password incorrectly, please try again'
+        );
+      });
   };
+
   return (
     <>
-      <h1 className={css.title}>Login Page</h1>
-      <form onSubmit={onSubmit}>
-        <label>
+      <h1 className={css.title}>Login</h1>
+      <form onSubmit={onSubmit} className={css.form}>
+        <label className={css.label}>
           <p>Email:</p>
           <input
+            className={css.input}
             type="email"
-            placeholder="hotmail@hotmail.com"
+            placeholder="example@mail.com"
             required
             name="userEmail"
           />
         </label>
-        <label>
+        <label className={css.label}>
           <p>Password:</p>
           <input
+            className={css.input}
             type="password"
-            placeholder="*******"
+            placeholder="******"
             required
             name="userPassword"
-            minLength={7}
           />
         </label>
         <br />
-        <button type="submit">Sign In</button>
+        <button className={css.button} type="submit">
+          Sign In
+        </button>
       </form>
+      <p>
+        If you do not have an account, please{' '}
+        <Link to="/register">register</Link>
+      </p>
     </>
   );
 };

@@ -35,15 +35,18 @@ export const ContactForm = () => {
       number: number.value,
     };
     try {
-      dispatch(addContact(newContact));
-      name.value = '';
-      number.value = '';
+      dispatch(addContact(newContact))
+        .unwrap()
+        .then(() => {
+          evt.target.reset();
+        })
+        .then(() => {
+          Notify.success(`Contact "${newContact.name}"  added successfully`);
+        });
     } catch (e) {
       Notify.error(
         `Contact "${newContact.name}" not added.  Error: ${e.message}`
       );
-    } finally {
-      Notify.success(`Contact "${newContact.name}"  added successfully`);
     }
   };
   return (

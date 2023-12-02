@@ -42,8 +42,9 @@ export const ContactList = () => {
   );
 
   const handleDeleteContact = (name, id) => {
-    dispatch(deleteContact(id));
-    Notify.info(`Contact "${name}" deleted`);
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => Notify.info(`Contact "${name}" deleted`));
   };
 
   return (

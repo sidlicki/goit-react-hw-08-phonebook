@@ -68,14 +68,18 @@ export const Modal = () => {
     };
 
     try {
-      dispatch(editContact(newContactInfo));
+      dispatch(editContact(newContactInfo))
+        .unwrap()
+        .then(() =>
+          Notify.success(
+            `Contact "${newContactInfo.name}"  edited successfully`
+          )
+        );
       dispatch(updateModalData(newContactInfo));
     } catch (e) {
       Notify.error(
         `Contact "${newContactInfo.name}" not edited.  Error: ${e.message}`
       );
-    } finally {
-      Notify.success(`Contact "${newContactInfo.name}"  edited successfully`);
     }
   };
 
@@ -103,7 +107,7 @@ export const Modal = () => {
             />
             <input
               className={css.input}
-              type="tel"
+              type="text"
               name="number"
               defaultValue={modalData.number}
               placeholder="Enter new number"

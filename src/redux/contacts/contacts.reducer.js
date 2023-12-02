@@ -41,43 +41,13 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-// export const addToFavorite = createAsyncThunk(
-//   'contacts/addToFavorite',
-//   async (contactId, thunkApi) => {
-//     try {
-//       const { data } = await axios.put(
-//         `https://6560d78d83aba11d99d199f6.mockapi.io/contacts/allContacts/${contactId}`,
-//         { favorite: true }
-//       );
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
-// export const removeFromFavorite = createAsyncThunk(
-//   'contacts/removeFromFavorite',
-//   async (contactId, thunkApi) => {
-//     try {
-//       const { data } = await axios.put(
-//         `https://6560d78d83aba11d99d199f6.mockapi.io/contacts/allContacts/${contactId}`,
-//         { favorite: false }
-//       );
-//       return data;
-//     } catch (error) {
-//       return thunkApi.rejectWithValue(error.message);
-//     }
-//   }
-// );
-
 export const editContact = createAsyncThunk(
   'contacts/editContact',
-  async (newContactInfo, thunkApi) => {
+  async (newInfo, thunkApi) => {
     try {
-      const { data } = await instance.put(`/contacts/${newContactInfo.id}`, {
-        name: newContactInfo.name,
-        number: newContactInfo.number,
+      const { data } = await instance.patch(`/contacts/${newInfo.id}`, {
+        name: `${newInfo.name}`,
+        number: `${newInfo.number}`,
       });
       return data;
     } catch (error) {
@@ -119,17 +89,6 @@ const contactsSlice = createSlice({
           contact => contact.id !== payload.id
         );
       })
-      // praca z favorite
-      // .addCase(addToFavorite.fulfilled, (state, { payload }) => {
-      //   state.contacts.items = state.contacts.items.map(contact =>
-      //     contact.id === payload.id ? { ...contact, favorite: true } : contact
-      //   );
-      // })
-      // .addCase(removeFromFavorite.fulfilled, (state, { payload }) => {
-      //   state.contacts.items = state.contacts.items.map(contact =>
-      //     contact.id === payload.id ? { ...contact, favorite: false } : contact
-      //   );
-      // })
       .addCase(editContact.fulfilled, (state, { payload }) => {
         console.log(payload);
         state.contacts.items = state.contacts.items.map(contact =>
@@ -154,8 +113,6 @@ const contactsSlice = createSlice({
           fetchAllContacts.rejected,
           addContact.rejected,
           deleteContact.rejected,
-          // addToFavorite.rejected,
-          // removeFromFavorite.rejected,
           editContact.rejected
         ),
         (state, { payload }) => {

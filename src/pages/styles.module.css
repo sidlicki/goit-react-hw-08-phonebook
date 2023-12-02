@@ -1,6 +1,6 @@
 .title,
 .subtitle {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
   text-align: center;
   margin: 0;
@@ -18,4 +18,83 @@
 .subtitle {
   width: 70%;
   margin-top: 40px;
+}
+a {
+  text-decoration: none;
+}
+
+.homeTitle {
+  width: 70%;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  color: rgb(41, 0, 0);
+  background-color: rgba(10, 85, 151, 0.316);
+  padding: 4px 0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 16px;
+  position: relative;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+  width: 70%;
+  height: 36px;
+  padding: 0 15px 0 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(41, 0, 0);
+  background-color: rgba(10, 85, 151, 0.116);
+  transition: 0.3s ease;
+}
+.input:focus {
+  background-color: rgba(10, 85, 151, 0.305);
+  transition: 0.3s ease;
+}
+.input:hover {
+  background-color: rgba(10, 85, 151, 0.305);
+  transition: 0.3s ease;
+}
+
+.button {
+  width: 40%;
+  min-width: 150px;
+  height: 40px;
+  padding: 0 15px 0 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(41, 0, 0);
+  background-color: rgba(12, 74, 128, 0.216);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.button:hover {
+  background-color: rgba(10, 85, 151, 0.405);
+  transition: 0.3s ease;
+}
+.button:focus {
+  background-color: rgba(10, 85, 151, 0.405);
+  transition: 0.3s ease;
 }

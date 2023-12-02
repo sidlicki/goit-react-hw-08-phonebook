@@ -2,6 +2,8 @@ import React from 'react';
 import css from './styles.module.css';
 import { useDispatch } from 'react-redux';
 import { registerThunk } from 'redux/auth/auth.reducer';
+import { Link } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -18,30 +20,43 @@ const RegisterPage = () => {
       email,
       password,
     };
-    dispatch(registerThunk(formData));
+    dispatch(registerThunk(formData))
+      .unwrap()
+      .then(() => e.target.reset())
+      .catch(() => {
+        Notiflix.Notify.failure('Error, please try again');
+      });
   };
 
   return (
     <>
       <h1 className={css.title}>Register Page</h1>
 
-      <form onSubmit={onSubmit}>
-        <label>
+      <form onSubmit={onSubmit} className={css.form}>
+        <label className={css.label}>
           <p>Name:</p>
-          <input type="text" placeholder="Your name" required name="userName" />
+          <input
+            className={css.input}
+            type="text"
+            placeholder="Your name"
+            required
+            name="userName"
+          />
         </label>
-        <label>
+        <label className={css.label}>
           <p>Email:</p>
           <input
+            className={css.input}
             type="email"
             placeholder="example@mail.com"
             required
             name="userEmail"
           />
         </label>
-        <label>
+        <label className={css.label}>
           <p>Password:</p>
           <input
+            className={css.input}
             type="password"
             placeholder="******"
             required
@@ -49,8 +64,13 @@ const RegisterPage = () => {
           />
         </label>
         <br />
-        <button type="submit">Sign Up</button>
+        <button className={css.button} type="submit">
+          Sign Up
+        </button>
       </form>
+      <p>
+        If you have an account, please <Link to="/login">login</Link>
+      </p>
     </>
   );
 };
